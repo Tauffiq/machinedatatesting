@@ -14,8 +14,6 @@
       "temperature_c": 27.8
     }
   ],
-  "mac_addresses": [
+  "mac_addresses":
     "00:1A:2B:3C:4D:5E",
-    "00:1A:2B:3C:4D:5F"
-  ]
 }
