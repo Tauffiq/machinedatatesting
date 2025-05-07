@@ -1,0 +1,282 @@
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<div style="width: 300px; height: 400px; margin: 0 auto">
+    <div id="CPU Utilization" style="width: 300px; height: 200px; float: left"></div>
+
+</div>
+
+
+<style>
+.highcharts-yaxis-grid .highcharts-grid-line {
+    display: none;
+}
+
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.js" integrity="sha512-MNW6IbpNuZZ2VH9ngFhzh6cUt8L/0rSVa60F8L22K1H72ro4Ki3M/816eSDLnhICu7vwH/+/yb8oB3BtBLhMsA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript">
+
+
+
+let access_token = ''
+
+
+    
+var gaugeOptions = {
+    chart: {
+        type: 'solidgauge'
+    },
+
+    title: null,
+
+    pane: {
+        center: ['50%', '85%'],
+        size: '140%',
+        startAngle: -90,
+        endAngle: 90,
+        background: {
+            backgroundColor:
+                Highcharts.defaultOptions.legend.backgroundColor || '#EEE',
+            innerRadius: '60%',
+            outerRadius: '100%',
+            shape: 'arc'
+        }
+    },
+
+    exporting: {
+        enabled: false
+    },
+
+    tooltip: {
+        enabled: false
+    },
+
+    // the value axis
+    yAxis: {
+        stops: [
+            [0.1, '#55BF3B'], // green
+            [0.5, '#DDDF0D'], // yellow
+            [0.9, '#DF5353'] // red
+        ],
+        lineWidth: 0,
+        tickWidth: 0,
+        minorTickInterval: null,
+        tickAmount: 2,
+        title: {
+            y: -70
+        },
+        labels: {
+            y: 16
+        }
+    },
+
+
+    plotOptions: {
+        solidgauge: {
+            dataLabels: {
+                y: 5,
+                borderWidth: 0,
+                useHTML: true
+            }
+        }
+    }
+
+
+};
+
+var gaugeOptions1 = {
+    chart: {
+        type: 'solidgauge'
+    },
+
+    title: null,
+
+    pane: {
+        center: ['50%', '85%'],
+        size: '140%',
+        startAngle: -90,
+        endAngle: 90,
+        background: {
+            backgroundColor:
+                Highcharts.defaultOptions.legend.backgroundColor || '#EEE',
+            innerRadius: '60%',
+            outerRadius: '100%',
+            shape: 'arc'
+        }
+    },
+
+    exporting: {
+        enabled: false
+    },
+
+    tooltip: {
+        enabled: false
+    },
+
+    // the value axis
+    yAxis: {
+        stops: [
+            [0.1, '#DF5353'], // green
+            [0.5, '#DDDF0D'], // yellow
+            [0.9, '#55BF3B'] // red
+        ],
+        lineWidth: 0,
+        tickWidth: 0,
+        minorTickInterval: null,
+        tickAmount: 2,
+        title: {
+            y: -70
+        },
+        labels: {
+            y: 16
+        }
+    },
+
+
+    plotOptions: {
+        solidgauge: {
+            dataLabels: {
+                y: 5,
+                borderWidth: 0,
+                useHTML: true
+            }
+        }
+    }
+
+
+};
+
+// The CPU Gauge
+var cpuUtilization = Highcharts.chart('CPU Utilization', Highcharts.merge(gaugeOptions, {
+    yAxis: {
+        min: 0,
+        max: 100,
+        title: {
+            text: '<span style="font-size:15px">CPU Utilization'
+        }
+    },
+
+    credits: {
+        enabled: false
+    },
+
+    series: [{
+        name: 'Speed',
+        data: [80],
+        dataLabels: {
+            format:
+                '<div style="text-align:center">' +
+                '<span style="font-size:25px">{y}</span><br/>' +
+                '<span style="font-size:12px;opacity:0.4">%</span>' +
+                '</div>'
+        },
+        tooltip: {
+            valueSuffix: ' km/h'
+        }
+    }]
+
+}));
+
+
+getToken();
+
+function getToken() {
+    axios.post('https://ara.tnbr.com.my:8160/api/v1/login', {
+    email: 'admin@gmail.com',
+    password: '11111111'
+  })
+  .then(function (response) {
+        access_token = response.data.access_token;
+        getZabbix();
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+
+}
+
+
+
+function getZabbix() {
+    axios.get('https://ara.tnbr.com.my:8160/api/v1/ar-api?hostname=C9200-SW-R2', {
+      headers: {
+        'Authorization': 'Bearer ' + access_token
+      }
+    }).then(function (response2) {
+         console.log(response2);
+         console.log(response2.data.data.gauge_info.cpu_utilization.lastvalue);
+
+
+        point = cpuUtilization.series[0].points[0];
+        point.update(parseInt(response2.data.data.gauge_info.cpu_utilization.lastvalue));
+
+
+        recallZabbix();
+    })
+      .catch(function (error2) {
+        console.log(error2);
+      });
+}
+
+
+function recallZabbix() {
+    setTimeout(() => {
+        getZabbix()
+    }, 2000);
+}
+
+// // Bring life to the dials
+// setInterval(function () {
+//     // Speed
+//     var point,
+//         newVal,
+//         inc;
+
+//     if (chartSpeed) {
+//         point = chartSpeed.series[0].points[0];
+//         inc = Math.round((Math.random() - 0.5) * 100);
+//         newVal = point.y + inc;
+
+//         if (newVal < 0 || newVal > 100) {
+//             newVal = point.y - inc;
+//         }
+
+//         point.update(newVal);
+//     }
+
+//     if (networkSpeed) {
+//         point = networkSpeed.series[0].points[0];
+//         inc = Math.round((Math.random() - 0.5) * 50);
+//         newVal = point.y + inc;
+
+//         if (newVal < 0 || newVal > 100) {
+//             newVal = point.y - inc;
+//         }
+
+//         point.update(newVal);
+//     }
+
+//     // RPM
+//     if (chartRpm) {
+//         point = chartRpm.series[0].points[0];
+//         inc = Math.random() - 0.5;
+//         newVal = point.y + inc;
+
+//         if (newVal < 0 || newVal > 5) {
+//             newVal = point.y - inc;
+//         }
+
+//         point.update(newVal);
+//     }
+// }, 1000);
+
+
+</script>
