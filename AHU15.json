@@ -1,35 +1,40 @@
 {
   "deviceName": "AHU-15",
-  "coil1": {
-    "setpoint": "12.0C",
-    "cwValve": "80%"
-  },
-  "coil2": {
-    "setpoint": "12.0C",
-    "hwValve": "50%"
-  },
-  "schedule": "ON",
+  "raTemp": "32C",
   "filterStatus": "Dirty",
-  "temperatures": {
-    "taTemp": "32C",
-    "maTemp": "23C",
-    "ccraTemp": "24C",
-    "saTemp": "18C"
+  "ccraTemp": "24C",
+  "blower": {
+    "command": "Start",
+    "status": "Run"
   },
+  "saTemp": "18C",
   "staticPressure": "0.32 in/wc",
+  "maTemp": "23C",
   "cwp": {
     "command": "Start",
     "status": "Stop"
+  },
+  "coil1": {
+    "setpoint": "12.0C",
+    "cwValve": "80%"
   },
   "hwp": {
     "command": "Stop",
     "status": "Stop"
   },
-  "tripStatus": "Normal",
+  "coil2": {
+    "setpoint": "12.0C",
+    "hwValve": "50%"
+  },
   "inverter": "36 Hz",
+  "tripStatus": "Normal",
+  "room": {
+    "temperature": "26.7C",
+    "humidity": "49%"
+  },
   "dataTables": {
     "table1": {
-      "deviceName": "AHU-15",
+      "title": "AHU-15",
       "command": "Start",
       "status": "Run",
       "tripStatus": "Normal",
@@ -37,12 +42,14 @@
       "schedule": "On"
     },
     "table2": {
+      "title": "Chiller Value Valve",
       "chillerWaterPump": "Start",
       "pumpStatus": "Stop",
       "chillerWaterValve": "20%",
       "setPoint": "12.0C"
     },
     "table3": {
+      "title": "Hot Water Valve",
       "hotWaterPump": "Stop",
       "pumpStatus": "Stop",
       "hotWaterValve": "40%",
