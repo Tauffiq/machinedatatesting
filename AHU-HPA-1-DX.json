@@ -1,0 +1,85 @@
+{
+  "deviceName": "AHU-HPA-1-DX",
+  "room1": {
+    "temperature": "-2.0°C",
+    "humidity": "64.0%RH"
+  },
+  "room2": {
+    "temperature": "-1.0°C",
+    "humidity": "61.6%RH"
+  },
+  "highAlarmSet": "25.0°C",
+  "OATemp": "35.8°C",
+  "priFilterStatus": "Normal",
+  "CCDA": "0.7°C",
+  "blower": {
+    "command": "Start",
+    "status": "Run"
+  },
+  "HEPAFilterStatus": "Normal",
+  "SATemp": "-3.0°C",
+  "staticPressure": "0.4 in/wc",
+  "tripStatus": "Normal",
+  "pressureSetpoint": "1.60 in/wc",
+  "VSD": "35.0Hz",
+  "damper": {
+    "command": "Start",
+    "status": "Open"
+  },
+  "airFlow": "100.00 m/s",
+  "circuits": {
+    "circuit1": {
+      "comp1": "Stop",
+      "comp2": "Stop",
+      "comp3": "Stop",
+      "comp4": "Stop",
+      "setpoint": "19.0°C"
+    },
+    "circuit2": {
+      "comp1": "Stop",
+      "comp2": "Start",
+      "comp3": "Start",
+      "comp4": "Stop",
+      "setpoint": "17.0°C"
+    }
+  },
+  "statusTable": {
+    "title": "AHU HPA 1 DX VSD",
+    "speed": "0.0 rpm",
+    "freqFeedback": "0.0 Hz",
+    "current": "0.0 A",
+    "torque": "0.0%",
+    "power": "0.0 kW",
+    "dcBusVolt": "0.0 V",
+    "outputVoltage": "0.0 V",
+    "kwhCounter": "0.0 kW-hr"
+  },
+  "informationTables": {
+    "table1": {
+      "title": "COMMON",
+      "VSD_AT": "VSD",
+      "Bas_Local": "BMS",
+      "priFilterStatus": "Normal",
+      "HEPAFilterStatus": "Normal",
+      "damperCommand": "Start",
+      "damperStatus": "Open",
+      "damperBMS_Local": "Auto",
+      "waterLeak": "Normal",
+      "waterLeakCableBreak": "Normal"
+    },
+    "table2": {
+      "title": "VSD",
+      "command": "Start",
+      "status": "Run",
+      "tripStatus": "Normal",
+      "VSD": "35.0 Hz",
+      "schedule": "On"
+    },
+    "table3": {
+      "title": "Autorun",
+      "command": "Stop",
+      "status": "Stop",
+      "tripStatus": "Normal"
+    }
+  }
+}
