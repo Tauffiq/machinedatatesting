@@ -1,0 +1,82 @@
+{
+  "deviceName": "HPA 1 EF",
+  "mainData": {
+    "EF Duct Temp": "53.1c",
+    "Static Pres": "-0.6 in/wc",
+    "Air Flow": "54.11 m/s"
+  },
+  "commands": [
+    {
+      "Command": "Stop",
+      "Press Setpoint": "0.40 in/wc",
+      "Trip Status": "Normal",
+      "Blower Status": "Stop",
+      "Inverter": "35.0 Hz"
+    },
+    {
+      "Command": "Start",
+      "Press Setpoint": "0.37 in/wc",
+      "Trip Status": "Normal",
+      "Blower Status": "Run",
+      "Inverter": "34.0 Hz"
+    }
+  ],
+  "statusTable": [
+    {
+      "Title": "EF 1 Inverter",
+      "Speed": "0.0 rpm",
+      "Freq Feedback": "0.0 Hz",
+      "Current": "0.0 A",
+      "Torque": "0.0 %",
+      "Power": "0.0 kW",
+      "DC Bus Volt": "0.0 V",
+      "Output Voltage": "0.0 V",
+      "KWH Counter": "0.0 kW-hr"
+    },
+    {
+      "Title": "EF 2 Inverter",
+      "Speed": "0.0 rpm",
+      "Freq Feedback": "0.0 Hz",
+      "Current": "0.0 A",
+      "Torque": "0.0 %",
+      "Power": "0.0 kW",
+      "DC Bus Volt": "0.0 V",
+      "Output Voltage": "0.0 V",
+      "KWH Counter": "0.0 kW-hr"
+    }
+  ],
+  "tables": [
+    {
+      "Title": "EF 1 Common",
+      "VSD/DOL": "BMS",
+      "Bas/Local": "BMS"
+    },
+    {
+      "Title": "EF 1 Inverter",
+      "Command": "Stop",
+      "Status": "Stop",
+      "Trip Status": "Normal",
+      "Inverter": "35.0 Hz",
+      "Schedule": "Off"
+    },
+    {
+      "Title": "EF 1 DOL",
+      "Command": "Stop",
+      "Status": "Stop",
+      "Trip Status": "Normal"
+    },
+    {
+      "Title": "EF 2 Common",
+      "VSD/DOL": "BMS",
+      "Bas/Local": "BMS"
+    },
+    {
+      "Title": "EF 1 Inverter",
+      "Command": "Start",
+      "Status": "Run",
+      "Trip Status": "Normal",
+      "Inverter": "37.0 Hz",
+      "Schedule": "ON"
+    }
+  ]
+}
